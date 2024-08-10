@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Valor Mínimo de Compra</title>
+    <title>Calculadora de Valor Mínimo para Rota</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Montserrat, sans-serif;
             margin: 20px;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #141b4d;
         }
         h2 {
-            color: #333;
+            color: #ffffff;
         }
         label {
             font-weight: bold;
@@ -24,7 +24,7 @@
         }
         #resultado {
             font-weight: bold;
-            color: #007BFF;
+            color: #ff0000;
         }
     </style>
 </head>
@@ -42,9 +42,9 @@
             let valorMinimo;
 
             if (distancia <= 5) {
-                valorMinimo = 100;  // Valor fixo para até 5km, ajuste conforme necessário
+                valorMinimo = 220;  // Valor fixo para até 5km, ajuste conforme necessário
             } else {
-                valorMinimo = distancia * 20;  // Fórmula para distâncias maiores, ajuste conforme necessário
+                valorMinimo = distancia * 50;  // Fórmula para distâncias maiores, ajuste conforme necessário
             }
 
             document.getElementById('resultado').innerText = valorMinimo.toFixed(2);
