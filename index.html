@@ -9,7 +9,7 @@
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #141b4d;
+            background-color: #ff7a15;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,13 +17,14 @@
         }
         .container {
             text-align: center;
-            background-color: #1f2a63;
+            background-color: #141b4d;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
         h2, label, p {
             color: #ffffff; /* Altera o texto para branco */
+            font-weight: 700; /* Aumenta o peso da fonte */
         }
         input, button {
             padding: 10px;
@@ -33,15 +34,22 @@
             background-color: #333333; /* Fundo escuro para contraste */
             border: 1px solid #ffffff; /* Borda branca para contraste */
             border-radius: 5px;
+            font-weight: 600; /* Aumenta o peso da fonte */
         }
         #resultado {
-            font-weight: bold;
-            color: #ff0000;
+            font-weight: 700; /* Aumenta o peso da fonte */
+            color: #ff7a15; /* Altera a cor para #ff7a15 */
+        }
+        .logo {
+            width: 150px; /* Ajuste o tamanho conforme necessário */
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Adicione a logo aqui -->
+        <img src="Logo Rezende.png" alt="Logo Rezende" class="logo">
         <h2>Calculadora de Valor Mínimo de Compra</h2>
         <label for="distancia">Distância (KM): </label>
         <input type="number" id="distancia" name="distancia" min="0" step="0.1" required>
