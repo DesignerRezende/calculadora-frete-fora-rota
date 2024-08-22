@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Valor Mínimo para Entregas Fora de Rota</title>
-<link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="favicon.png" type="image/png">
     <style>
         body {
             font-family: Montserrat, sans-serif;
@@ -73,14 +73,15 @@
     
     <script>
         function calcularValor() {
-            const distancia = parseFloat(document.getElementById('distancia').value);
-            let valorMinimo;
+            const valorFixo = 552.64;
+            const valorKm = 2.50;
+            const refeicao = 100.00;
+            const depreciacao = 1.5;
 
-            if (distancia <= 5) {
-                valorMinimo = 220;  // Valor fixo para até 5km, ajuste conforme necessário
-            } else {
-                valorMinimo = distancia * 20;  // Fórmula para distâncias maiores, ajuste conforme necessário
-            }
+            const distancia = parseFloat(document.getElementById('distancia').value);
+
+            // Fórmula aplicada
+            let valorMinimo = valorFixo + ((distancia * valorKm) * depreciacao) + refeicao;
 
             document.getElementById('resultado').innerText = valorMinimo.toFixed(2);
         }
