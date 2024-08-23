@@ -111,8 +111,8 @@
         // Impede que letras sejam digitadas no campo de distância
         document.getElementById('distancia').addEventListener('input', function(event) {
             let value = event.target.value;
-            if (/[^0-9.,]/.test(value)) {
-                event.target.value = value.replace(/[^0-9.,]/g, '');
+            if (/[^0-9.,-]/.test(value)) {
+                event.target.value = value.replace(/[^0-9.,-]/g, '');
                 document.getElementById('erro').innerText = "Por favor, insira apenas números.";
             } else {
                 document.getElementById('erro').innerText = "";
