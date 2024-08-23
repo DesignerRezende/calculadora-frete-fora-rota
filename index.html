@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora para Entregas Fora de Rota</title>
+    <title>Calculadora de Valor Mínimo para Entregas Fora de Rota</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
         body {
@@ -54,21 +54,26 @@
             width: 150px; /* Ajuste o tamanho conforme necessário */
             margin-bottom: 20px;
         }
+        .erro {
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Adicione a logo aqui -->
         <img src="Logo Rezende.png" alt="Logo Rezende" class="logo">
-        <h2>Calculadora para Entregas Fora de Rota</h2>
+        <h2>Calculadora de Valor Mínimo para Entregas Fora de Rota</h2>
         <label for="distancia">Distância (KM): </label>
         <input type="number" id="distancia" name="distancia" min="0" step="0.1" required>
         <br>
         <button onclick="calcularValor()">Calcular</button>
         
-        <p>Valor do Frete: R$<span id="resultado">0.00</span></p>
-        <!-- Aviso adicionado aqui -->
+        <p>Valor Mínimo de Compra: R$<span id="resultado">0.00</span></p>
         <p class="aviso">* Cálculo apenas para entregas fora das rotas convencionais.</p>
+        <p id="erro" class="erro"></p> <!-- Mensagem de erro aqui -->
     </div>
     
     <script>
@@ -79,12 +84,29 @@
             const depreciacao = 1.5;
 
             const distancia = parseFloat(document.getElementById('distancia').value);
+            const erroMsg = document.getElementById('erro');
+
+            // Validação para distância negativa
+            if (distancia < 0) {
+                erroMsg.innerText = "Por favor, insira uma quilometragem válida.";
+                document.getElementById('resultado').innerText = "0.00";
+                return;
+            } else {
+                erroMsg.innerText = ""; // Limpa a mensagem de erro
+            }
 
             // Fórmula aplicada
             let valorMinimo = valorFixo + ((distancia * valorKm) * depreciacao) + refeicao;
 
             document.getElementById('resultado').innerText = valorMinimo.toFixed(2);
         }
+
+        // Adiciona evento para cálculo ao pressionar Enter
+        document.getElementById('distancia').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calcularValor();
+            }
+        });
     </script>
 </body>
 </html>
