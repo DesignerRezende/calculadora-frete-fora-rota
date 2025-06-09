@@ -68,7 +68,13 @@
             font-weight: 700; /* Aumenta o peso da fonte */
             font-size: 1.5em; /* Define o mesmo tamanho de fonte do título */
             margin-top: 10px; /* Reduzindo a margem superior do parágrafo */
-        }* Altera a cor para #141b4d */
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5); /* Branco transparente */
+        }
+        #resultado {
+            font-weight: 700; /* Aumenta o peso da fonte */
+            color: #141b4d; /* Altera a cor para #141b4d */
         }
         .aviso {
             color: #141b4d; /* Cor do texto do aviso */
@@ -76,7 +82,7 @@
             font-style: italic; /* Texto em itálico */
             margin-top: 10px;
             text-align: left; /* Alinha o texto à esquerda */
-            font-size: 0.9em; /* Define um tamanho de fonte menor para as frases de aviso */
+            font-size: 0.9em; /* Define um tamanho de fonte menor que o label "Distância (KM):" */
         }
         .logo {
             width: 150px; /* Ajuste o tamanho conforme necessário */
