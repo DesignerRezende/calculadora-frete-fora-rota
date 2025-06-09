@@ -102,7 +102,7 @@
         <img src="Logo Rezende.png" alt="Logo Rezende" class="logo">
         <h2>Calculadora para Entregas Fora de Rota</h2>
         <label for="distancia">Distância (KM): </label>
-        <input type="number" id="distancia" name="distancia" min="0" step="0.1" required placeholder="100 (ida:50 e volta:50)">
+        <input type="number" id="distancia" name="distancia" min="0" step="0.1" required placeholder="Ex: 100 (ida e volta)">
         <button onclick="calcularValor()">Calcular</button>
         
         <p>Valor de Frete: R$<span id="resultado">0.00</span></p>
@@ -119,13 +119,13 @@
             const refeicao = 100.00;
             const depreciacao = 1.5;
 
-            const distancia = parseFloat(document.getElementById('distancia').value);
-            const erroMsg = document.getElementById('erro');
+            const distancia = parseFloat(document.getElementById("distancia").value.replace(",", "."));
+            const erroMsg = document.getElementById("erro");
 
             // Validação para distância negativa
             if (distancia < 0) {
                 erroMsg.innerText = "Por favor, insira uma quilometragem válida.";
-                document.getElementById('resultado').innerText = "0.00";
+                document.getElementById("resultado").innerText = "0.00";
                 return;
             } else {
                 erroMsg.innerText = ""; // Limpa a mensagem de erro
@@ -134,26 +134,187 @@
             // Fórmula aplicada
             let valorMinimo = valorFixo + ((distancia * valorKm) * depreciacao) + refeicao;
 
-            document.getElementById('resultado').innerText = valorMinimo.toFixed(2);
+            document.getElementById("resultado").innerText = valorMinimo.toFixed(2);
         }
 
         // Adiciona evento para cálculo ao pressionar Enter
-        document.getElementById('distancia').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
+        document.getElementById("distancia").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
                 calcularValor();
             }
         });
 
         // Impede que letras sejam digitadas no campo de distância
-        document.getElementById('distancia').addEventListener('input', function(event) {
+        document.getElementById("distancia").addEventListener("input", function(event) {
             let value = event.target.value;
-            if (/[^0-9.,-]/.test(value)) {
-                event.target.value = value.replace(/[^0-9.,-]/g, '');
-                document.getElementById('erro').innerText = "Por favor, insira apenas números.";
+            if (/[^0-9.,]/.test(value)) {
+                event.target.value = value.replace(/[^0-9.,]/g, "");
+                document.getElementById("erro").innerText = "Por favor, insira apenas números, pontos ou vírgulas.";
             } else {
-                document.getElementById('erro').innerText = "";
+                document.getElementById("erro").innerText = "";
             }
         });
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora para Entregas Fora de Rota</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141b4d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altura da viewport para centralização vertical */
+        }
+        .container {
+            text-align: center;
+            background-color: #ff7a15;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin: 0 20px; /* Adiciona margem nas laterais */
+            max-width: 100%; /* Garante que o contêiner não exceda a largura da tela */
+            box-sizing: border-box; /* Inclui padding e borda na largura total do elemento */
+        }
+        h2 {
+            color: #ffffff; /* Altera o texto para branco */
+            font-weight: 700; /* Aumenta o peso da fonte */
+            font-size: 1.5em; /* Define um tamanho de fonte para o título */
+        }
+        label {
+            color: #ffffff; /* Altera o texto para branco */
+            font-weight: 700; /* Aumenta o peso da fonte */
+            font-size: 1.1em; /* Define um tamanho de fonte para o label */
+        }
+        p {
+            color: #ffffff; /* Altera o texto para branco */
+            font-weight: 700; /* Aumenta o peso da fonte */
+            font-size: 1.5em; /* Define o mesmo tamanho de fonte do título */
+        }
+        input {
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 10px; /* Adiciona um pequeno espaço entre o input e o botão */
+            color: #ffffff; /* Texto branco nos campos de entrada */
+            background-color: #333333; /* Fundo escuro para contraste */
+            border: 1px solid #ffffff; /* Borda branca para contraste */
+            border-radius: 5px;
+            font-weight: 600; /* Aumenta o peso da fonte */
+            display: inline-block; /* Permite que o input e o botão fiquem na mesma linha */
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px; /* Reduzindo a margem inferior do botão */
+            color: #ffffff; /* Texto branco nos botões */
+            background-color: #333333; /* Fundo escuro para contraste */
+            border: 1px solid #ffffff; /* Borda branca para contraste */
+            border-radius: 5px;
+            font-weight: 600; /* Aumenta o peso da fonte */
+            display: inline-block; /* Permite que o input e o botão fiquem na mesma linha */
+        }
+        p {
+            color: #ffffff; /* Altera o texto para branco */
+            font-weight: 700; /* Aumenta o peso da fonte */
+            font-size: 1.5em; /* Define o mesmo tamanho de fonte do título */
+            margin-top: 10px; /* Reduzindo a margem superior do parágrafo */
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5); /* Branco transparente */
+        }
+        #resultado {
+            font-weight: 700; /* Aumenta o peso da fonte */
+            color: #141b4d; /* Altera a cor para #141b4d */
+        }
+        .aviso {
+            color: #141b4d; /* Cor do texto do aviso */
+            font-weight: bold; /* Texto em negrito */
+            font-style: italic; /* Texto em itálico */
+            margin-top: 10px;
+            text-align: left; /* Alinha o texto à esquerda */
+            font-size: 0.9em; /* Define um tamanho de fonte menor que o label "Distância (KM):" */
+        }
+        .logo {
+            width: 180px; /* Aumenta o tamanho da logo */
+            margin-top: 10px; /* Ajusta a margem superior para centralização */
+            margin-bottom: 10px; /* Ajusta a margem inferior para centralização */
+        }
+        .erro {
+            color: #ffffff;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Adicione a logo aqui -->
+        <img src="Logo Rezende.png" alt="Logo Rezende" class="logo">
+        <h2>Calculadora para Entregas Fora de Rota</h2>
+        <label for="distancia">Distância (KM): </label>
+        <input type="number" id="distancia" name="distancia" min="0" step="0.1" required placeholder="Ex: 100 (ida e volta)">
+        <button onclick="calcularValor()">Calcular</button>
+        
+        <p>Valor de Frete: R$<span id="resultado">0.00</span></p>
+        <p class="aviso">* Cálculo apenas para entregas fora das rotas convencionais.</p>
+        <p class="aviso">* A distância considerada é de ida e volta.</p>
+        <p class="aviso">* O valor do pedágio já está incluído no cálculo.</p>
+        <p id="erro" class="erro"></p> <!-- Mensagem de erro aqui -->
+    </div>
+    
+    <script>
+        function calcularValor() {
+            const valorFixo = 552.64;
+            const valorKm = 2.50;
+            const refeicao = 100.00;
+            const depreciacao = 1.5;
+
+            const distancia = parseFloat(document.getElementById("distancia").value.replace(",", "."));
+            const erroMsg = document.getElementById("erro");
+
+            // Validação para distância negativa
+            if (distancia < 0) {
+                erroMsg.innerText = "Por favor, insira uma quilometragem válida.";
+                document.getElementById("resultado").innerText = "0.00";
+                return;
+            } else {
+                erroMsg.innerText = ""; // Limpa a mensagem de erro
+            }
+
+            // Fórmula aplicada
+            let valorMinimo = valorFixo + ((distancia * valorKm) * depreciacao) + refeicao;
+
+            document.getElementById("resultado").innerText = valorMinimo.toFixed(2);
+        }
+
+        // Adiciona evento para cálculo ao pressionar Enter
+        document.getElementById("distancia").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                calcularValor();
+            }
+        });
+
+        // Impede que letras sejam digitadas no campo de distância
+        document.getElementById("distancia").addEventListener("input", function(event) {
+            let value = event.target.value;
+            if (/[^0-9.,]/.test(value)) {
+                event.target.value = value.replace(/[^0-9.,]/g, "");
+                document.getElementById("erro").innerText = "Por favor, insira apenas números, pontos ou vírgulas.";
+            } else {
+                document.getElementById("erro").innerText = "";
+            }
+        });
+    </script>
+</body>
+</html>
+
